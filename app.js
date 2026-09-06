@@ -1,0 +1,6 @@
+const offers=[{name:'تذكرة المرح',price:49,desc:'دخول + ألعاب مختارة لمدة ساعتين'},{name:'باقة العائلة',price:149,desc:'4 أشخاص + ألعاب مختارة + مشروب لكل شخص'},{name:'حفلة الأصدقاء',price:299,desc:'حتى 8 أشخاص + مساحة احتفال + أنشطة خاصة'}];
+const grid=document.getElementById('offersGrid');
+grid.innerHTML=offers.map(o=>`<article class="card offer"><p class="eyebrow">عرض اليوم</p><h3>${o.name}</h3><p>${o.desc}</p><div class="price">${o.price} <small>ريال</small></div><button class="btn pick" data-offer="${o.name}">اختيار الباقة</button></article>`).join('');
+document.querySelectorAll('.pick').forEach(b=>b.onclick=()=>{document.querySelector('[name="offer"]').value=b.dataset.offer;document.getElementById('booking').scrollIntoView({behavior:'smooth'})});
+document.querySelector('[name="visit_date"]').min=new Date().toISOString().split('T')[0];
+document.getElementById('bookingForm').addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target));d.created_at=new Date().toISOString();d.status='new';d.code='FUN-'+Math.random().toString(36).slice(2,7).toUpperCase();const all=JSON.parse(localStorage.getItem('funCenterBookings')||'[]');all.push(d);localStorage.setItem('funCenterBookings',JSON.stringify(all));document.getElementById('bookingMsg').textContent=`تم تسجيل الحجز بنجاح. رقم الحجز: ${d.code}`;e.target.reset()});
