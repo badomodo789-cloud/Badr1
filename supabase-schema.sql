@@ -20,7 +20,7 @@ create table if not exists public.bookings (
 create index if not exists bookings_visit_date_idx on public.bookings(visit_date);
 create index if not exists bookings_status_idx on public.bookings(status);
 insert into public.offers(name,description,price) values
-('تذكرة المرح','دخول + ألعاب مختارة لمدة ساعتين',49),
+('50تذكرة المرح','دخول + ألعاب مختارة لمدة ساعتين',),
 ('باقة العائلة','4 أشخاص + ألعاب مختارة + مشروب لكل شخص',149),
 ('حفلة الأصدقاء','حتى 8 أشخاص + مساحة احتفال + أنشطة خاصة',299)
 on conflict do nothing;
